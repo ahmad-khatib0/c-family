@@ -1,0 +1,90 @@
+
+A Brief History of C
+  The C programming language was developed in 1972 by Dennis Ritchie and Ken Thompson at Bell Telephone 
+  Laboratories. Brian Kernighan coauthored The C Programming Language (K&R 1988) with Dennis Ritchie. In 1983,
+  the American National Standards Institute (ANSI) formed the X3J11 committee to establish a standard C 
+  specification, and in 1989, the C Standard was ratified as ANSI X3.159-1989, “Programming Language C.” This 1989 
+  version of the language is referred to as ANSI C or C89. In 1990, the ANSI C Standard was adopted (unchanged) 
+  by a joint technical committee of the International Organization for Standardization (ISO) and the International 
+  Electrotechnical Commission (IEC) and published as the first edition of the C Standard, C90 (ISO/IEC 9899:1990). 
+  The second edition of the C Standard, C99, was published in 1999 (ISO/IEC 9899:1999), and a third edition, C11, 
+  in 2011 (ISO/IEC 9899:2011). The latest version of the C Standard (as of 2018) is the fourth version, published 
+  in 2018 as C17 (ISO/IEC 9899:2018). A new major revision referred to as C2x is under development by ISO/IEC
+
+Each compiler with a particular set of command line flags, along with the C Standard Library, is considered a 
+  separate implementation, and different implementations can have significantly different implementation-defined 
+  behavior. This is noticeable in GNU Compiler Collection (GCC), which uses the - std= flag to determine the 
+  language standard. Possible values for this option include c89, c90, c99, c11, c17 , c18, and c2x. The default 
+  depends on the version of the compiler. If no C language dialect options are given, the default for GCC 10 is 
+  -std=gnu17, which provides extensions to the C language. For portability, specify the standard you’re using. 
+  For access to new language features, specify a recent standard. A good choice (in 2019) with GCC 8 and later 
+  is -std=c17.
+
+C defines two possible execution environments: freestanding and hosted. A freestanding environment may not 
+  provide an operating system and is typically used in embedded programming. These implementations provide a 
+  minimal set of library functions, and the name and type of the function called at program startup are 
+  implementation defined
+
+GNU Compiler Collection
+  The GNU Compiler Collection (GCC) includes frontends for C, C++, and Objective-C, as well as other languages 
+  GCC development follows a well-defined development plan under the guidance of the GCC steering committee.
+  Another popular compiler is Clang (https://clang.llvm.org/)
+
+Microsoft Visual Studio
+  You can set options for Visual Studio on the Project Property Pages. On the Advanced tab under C/C++, make sure 
+  you compile as C code by using the Compile as C Code ( /TC) option and not the Compile as C++ Code ( /TP) option. 
+  By default, when you name a file with a .c extension, it’s compiled with /TC. If the file is named with 
+  a .cpp, .cxx, or a few other extensions, it’s compiled with /TP.
+
+Five kinds of portability issues are enumerated in Annex J of the C Standard documents:
+  -..  Implementation-defined behavior
+  -..  Unspecified behavior
+  -..  Undefined behavior
+  -..  Locale-specific behavior
+  -..  Common extensions
+
+Implementation-Defined Behavior
+  Implementation-defined behavior is program behavior that’s not specified by the C Standard and that may offer 
+  different results among implementations, but has consistent, documented behavior within an implementation.
+  An example of implementation-defined behavior is the number of bits in a byte.
+
+Unspecified Behavior
+  Unspecified behavior is program behavior for which the standard provides two or more options. The standard 
+  imposes no requirements on which option is chosen in any instance. Each execution of a given expression may 
+  have different results or produce a different value than a previous execution of the same expression. An example 
+  of unspecified behavior is function parameter storage layout, which can vary among function invocations within 
+  the same program. Avoid writing code that depends on the unspecified behaviors enumerated in Annex J.1 of 
+  the C Standard.
+
+Undefined Behavior
+  Undefined behavior is behavior that isn’t defined by the C Standard, or less circularly, “behavior, upon use 
+  of a nonportable or erroneous program construct or of erroneous data, for which the standard imposes no 
+  requirements.” Examples of undefined behavior include signed integer overflow and dereferencing an invalid 
+  pointer value. Code that has undefined behav- ior is often erroneous, but is more nuanced than that. 
+  Undefined behaviors are identified in the standard as follows:
+    • When a “shall” or “shall not” requirement is violated, and that requirement appears outside  
+      a constraint, the behavior is undefined
+    • When behavior is explicitly specified by the words “undefined behavior”
+    • By the omission of any explicit definition of behavior
+    
+The first two kinds of undefined behavior are frequently referred to as explicit undefined behaviors, while the 
+  third kind is referred to as implicit undefined behavior. There is no difference in emphasis among these three;
+  they all describe behavior that is undefined. 
+
+Developers frequently misunderstand undefined behaviors to be errors or omissions in the C Standard, but the 
+  decision to classify a behavior as undefined is intentional and considered. Behaviors are classified as 
+  undefined by the C Standards committee to do the following:
+• Give the implementer license not to catch program errors that are difficult to diagnose
+• Avoid defining obscure corner cases that would favor one implementation strategy over another
+• Identify areas of possible conforming language extension in which the implementer may augment the language 
+  by providing a definition of the officially undefined behavior
+
+Compilers (implementations) have the latitude to do the following:
+. . Ignore undefined behavior completely, giving unpredictable results
+. . Behave in a documented manner characteristic of the environment (with or without issuing a diagnostic)
+. . Terminate a translation or execution (with issuing a diagnostic)
+
+Locale-Specific Behavior and Common Extensions
+  Locale-specific behavior depends on local conventions of nationality, culture, and language that each implementation 
+  documents. Common extensions are widely used in many systems but are not portable to all implementations.
+
