@@ -1,0 +1,215 @@
+ +--------------------------------------------------------------+
+ |                                                              |
+ | Every type in C is either an object type or a function type. |
+ |                                                              |
+ +--------------------------------------------------------------+
+
+An object is storage in which you can represent values. To be precise, an object is defined by the C Standard 
+  (ISO/IEC 9899:2018) as a “region of data storage in the execution environment, the contents of which can 
+  represent values,” with the added note, “when referenced, an object can be interpreted as having a particular 
+  type.” A variable is an example of an object.
+  
+For example, the number 1 is represented in IEEE 754 (the IEEE Standard for Floating-Point Arithmetic) by the 
+  bit pattern 0x3f800000 (IEEE 754–2008). But if you were to interpret this same bit pattern as an integer,
+  you’d get the value 1,065,353,216 instead of 1.  
+
+DECLARING MULTIPLE VARIABLE S
+╒═════════════════════════════╕
+  char *src, c;               
+  int x, y[5];                
+  int m[12], n[15][3], o[21]; 
+╘═════════════════════════════╛
+The first line declares two variables, src and c, which have different types. The src variable has a type of 
+  char *, and c has a type of char. The second line again declares two variables, x and y, with different types. 
+  The variable x has a type int, and y is an array of five elements of type int. The third line declares three 
+  arrays — m, n, and o — with different dimensions and numbers of elements. 
+  These declarations are easier to understand if each is on its own line:
+  char *src; // src has a type of char *
++---------------------------------------------------------------------------+
+| char    c; // c has a type of char                                        |
+| int     x; // x has a type int                                            |
+| int     y[5]; // y is an array of 5 elements of type int                  |
+| int     m[12]; // m is an array of 12 elements of type int                |
+| int     n[15][3]; // n is an array of 15 arrays of 3 elements of type int |
+| int     o[21]; // o is an array of 21 elements of type int                |
+|                                                                           |
++---------------------------------------------------------------------------+
+
+C is a call-by-value (also called a pass-by-value) language, which means that when you provide an argument to 
+  a function, the value of that argument is copied into a distinct variable for use within the function
+
+C has four types of scope: file, block, function prototype, and function.
+
+Storage Duration
+  Objects have a storage duration that determines their lifetime. Altogether, four storage durations 
+  are available: automatic, static, thread, and allocated. 
+
+A constant value refers to literal constants (for example, 1, 'a', or 0xFF), enum members, and the 
+  results of operators such as alignof or sizeof; not const-qualified objects.
+
+Alignment 
+  Object types have alignment requirements that place restrictions on the addresses at which objects of that 
+  type may be allocated. An alignment represents the number of bytes between successive addresses at which a 
+  given object can be allocated. CPUs may have different behavior when accessing aligned data (for example, 
+  the data address is a multiple of the data size) versus unaligned data.
+Some machine instructions can perform multibyte accesses on nonword boundaries, but there may be a performance 
+  penalty. A word is a natural, fixed-sized unit of adata handled by the instruction set or the hardware of 
+  the processor. Some platforms cannot access unaligned memory. Alignment requirements may depend on the CPU 
+  word size (typically, 16, 32, or 64 bits).
+
+C11 introduced a simple, forward-compatible mechanism for specifying alignments. Alignments are represented as 
+  values of the type size_t. Every valid alignment value is a nonnegative integral power of two. An object type 
+  imposes a default alignment requirement on every object of that type: a stricter alignment (a larger power of two) 
+  can be requested using the alignment specifier ( _Alignas)
+
+Boolean Types
+  Objects declared as _Bool can store only the values 0 and 1. This Boolean type was introduced in C99, and 
+  starts with an underscore to differentiate it in existing programs that had already declared their own 
+  identifiers named bool or boolean. Identifiers that begin with an underscore and either an uppercase letter or 
+  another underscore are always reserved. The idea is that the C Standards committee can create new keywords such 
+  as _Bool, assuming that you have avoided the use of reserved identifiers. If you haven’t, as far as the C 
+  Standards committee is concerned, it is your fault for not reading the standard carefully.
+
+Character Types
+  The C language defines three character types: char, signed char, and unsigned char. Each compiler implementation 
+  will define char to have the same alignment, size, range, representation, and behavior as either signed char or
+  unsigned char. Regardless of the choice made, char is a separate type from the other two and is incompatible 
+  with both. The char type is commonly used to represent character data in C lan- guage programs. In particular, 
+  objects of type char must be able to represent the minimum set of characters required in the execution environment
+  (known as the basic execution character set), including upper- and lowercase letters, the 10 decimal digits, 
+  the space character, and various punctuation and control characters. The char type is inappropriate for integer 
+  data; it is safer to use signed char to represent small signed integer values, and unsigned char to 
+  represent small unsigned values.
+
+Character Types
+  The C language defines three character types: char, signed char, and unsigned char. Each compiler implementation 
+  will define char to have the same alignment, size, range, representation, and behavior as either signed char or 
+  unsigned char. Regardless of the choice made, char is a separate type from the other two and is incompatible 
+  with both. The char type is commonly used to represent character data in C language programs. In particular, 
+  objects of type char must be able to represent the minimum set of characters required in the execution environment 
+  (known as the basic execution character set), including upper- and lowercase letters, the 10 decimal digits, 
+  the space character, and various punctuation and control characters. The char type is inappropriate for integer 
+  data; it is safer to use signed char to represent small signed integer values, and unsigned
+  char to represent small unsigned values.
+
+The basic execution character set suits the needs of many conven- tional data processing applications, but 
+  its lack of non-English letters is an obstacle to acceptance by international users. To address this need, 
+  the C Standards committee specified a new, wide type to allow large character sets. You can represent the 
+  characters of a large character set as wide characters by using the wchar_t type, which generally takes more 
+  space than a basic character. Typically, implementations choose 16 or 32 bits to represent a wide character. 
+  The C Standard Library provides functions that support both narrow and wide character types.
+
+ +-------------------------------------------------------------------------------------------------------+
+ |                                                                                                       |
+ | Signed variables,                                                                                     |
+ | such as signed integers will allow you to represent numbers both in the positive and negative ranges. |
+ |                                                                                                       |
+ | Unsigned variables,                                                                                   |
+ | such as unsigned integers, will only allow you to represent numbers in the positive and zero.         |
+ |                                                                                                       |
+ | Unsigned and signed variables of the same type (such as int and byte) both have the same range        |
+ | (range of 65,536 and 256 numbers, respectively), but unsigned can represent a larger magnitude        |
+ | number than the corresponding signed variable. For example, an unsigned byte can represent values     |
+ | from 0 to 255, while signed byte can represent -128 to 127                                            |
+ |                                                                                                       |
+ +-------------------------------------------------------------------------------------------------------+
+
+The actual size of the various integer types can be inferred from the minimum and maximum representable 
+  values for the various integer types specified in the <limits.h> header file. The int type usually has the 
+  natural size suggested by the architecture of the execution environment, so the size would be 16 bits wide 
+  on a 16-bit architecture, and 32 bits wide on a 32-bit architecture. You can specify actual width integers 
+  by using type definitions from the <stdint.h> or <inttypes.h> headers, like uint32_t. These headers also 
+  provide type definitions for the widest available integer types: uintmax_t and intmax_t.
+
+Floating-Point Types
+  The C language supports three floating-point types: float , double , and long double . Floating-point arithmetic 
+  is similar to, and often used as a model for, the arithmetic of real numbers. The C language supports a 
+  variety of floating-point representations including, on most systems, the IEEE Standard for Floating-Point 
+  Arithmetic (IEEE 754–2008). The choice of floating-point representation is implementation dependent
+  
+Function Types
+  Function types are derived types. In this case, the type is derived from the return type and the number and 
+  types of its parameters. The return type of a function cannot be an array type.
+
+NOTE: You should never declare functions with an empty parameter list in C. First, this is a deprecated feature 
+  of the language that may be removed in the future. Second, the code could be ported to C++, so explicitly 
+  list parameter types and use void when there are no parameters.
+
+A function type with a parameter type list is known as a function prototype
+
+Derived Types
+  Derived types are types that are constructed from other types. These include
+  pointers, arrays, type definitions, structures, and unions,
+
+ +------------------------+
+ |                        |
+ | unsigned int i = 0;    |
+ | unsigned int j = 0;    |
+ | int arr[3][5];         |
+ | u func(arr[i]); 1      |
+ | v int x = arr[i][j]; 2 |
+ |                        |
+ +------------------------+
+When you use the expression arr[i] at u (which is equivalent to *(arr+i)), the following occurs:
+ 1-  arr is converted to a pointer to the initial array of five elements of type int starting at arr[i].
+ 2-  i is scaled to the type of arr by multiplying i by the size of one array of five int objects.
+ 3-  The results from steps 1 and 2 are added.
+ 4-  Indirection is applied to the result to produce an array of five elements of type int.
+
+Identifiers that end in _t in the standard headers are type definitions (aliases for existing types). Generally 
+  speaking, you should not follow this convention in your own code because the C Standard reserve identifiers 
+  that match the patterns int[0-9a-z_]*_t and uint[0-9a-z_]*_t, and the Portable Operating System Interface 
+  (POSIX) reserves all identifiers that end in _t. If you define identifiers that use these names, they may 
+  collide with names used by the implementation, 
+
+Unions
+  Union types are similar to structures, except that the memory used by the member objects overlaps. Unions 
+  can contain an object of one type at one time, and an object of a different type at a different time, but 
+  never both objects at the same time, and are primarily used to save memory.
+
+Type Qualifiers
+  Types can be qualified by using one or more of the following qualifiers: const, volatile, and restrict. 
+  Each of these qualifiers changes behaviors when accessing objects of the qualified type. The qualified and 
+  unqualified versions of types can be used interchangeably as arguments to functions, return values from 
+  functions, and members of unions.
+
+ +----------------------------------------------------+
+ | const int i = 1; // object of const-qualified type |
+ | int *ip = (int *)&i;                               |
+ | *ip = 2; // undefined behavior                     |
+ +----------------------------------------------------+
+C does not allow you to cast away the const if the original was declared as a const-qualified object. This 
+  code might appear to work, but it’s defective and may fail later. For example, the compiler might place 
+  the const-qualified object in read-only memory, causing a memory fault when trying to store a
+  value in the object at runtime.
+
+volatile
+  Objects of volatile-qualified types serve a special purpose. Static volatile-qualified objects are used 
+  to model memory-mapped input/output (I/O) ports, and static constant volatile-qualified objects model 
+  memory-mapped input ports such as a real-time clock. The values stored in these objects may change without 
+  the knowledge of the compiler. For example, every time the value from a real-time clock is read, it may 
+  change, even if the value has not been written to by the C program. Using a volatile-qualified type lets 
+  the compiler know that the value may change, and ensures that every access to the real-time clock occurs 
+  (­otherwise, an access to the real-time clock may be optimized away or replaced by a previously read and 
+  cached value),  In the following code, for example, the compiler must generate instructions to read the 
+  value from port and then write this value back to port:
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+               volatile int port;
+               port = port;
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+  Without the volatile qualification, the compiler would see this as a no-op (a programming statement that does 
+  nothing) and potentially eliminate both the read and the write. Also, volatile-qualified types are used for 
+  communications with signal handlers and with setjmp/longjmp. Unlike in Java and other programming languages, 
+  volatile-qualified types in C should not be used for synchronization between threads.
+  
+
+restrict
+  A restrict-qualified pointer is used to promote optimization. Objects ­indirectly accessed through a pointer 
+  frequently cannot be fully optimized because of potential aliasing, which occurs when more than one pointer 
+  refers to the same object. Aliasing can inhibit optimizations, because the compiler can’t tell if portions 
+  of an object can change values when another apparently unrelated object is modified, 
+  Although using restrict-qualified pointers can result in more efficient code, you must ensure that the 
+  pointers do not refer to overlapping memory to prevent undefined behavior.
+
+
+
