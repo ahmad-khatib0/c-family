@@ -1,3 +1,22 @@
 
+Standard data types in C++ include the following:
+• int: To store whole numbers
+• float: To store floating point values
+• double: To store double precision floating point values
+• char: To store a single character
+• bool: For boolean values of true or false
 
+== It is important to note that the C++ community is moving away from native C++ strings 
+   that is, those implemented using an array of (or pointer to) characters.
 
+The iostream library
+  cin can be used in conjunction with the extraction operator >> for buffered input
+  cout can be used in conjunction with the insertion operator << for buffered output
+  cerr (unbuffered) and clog (buffered) can also be used in conjunction with the insertion operator, but for errors
+
+Basic iostream manipulators (defined in the <iomanip> header file.): 
+• endl: Places a newline character ('\n') in the buffer associated with cout then flushes the buffer
+• flush: Clears the contents of the output stream
+• setprecision(int): Defines the precision (number of digits) used to output floating point numbers
+• setw(int): Sets the width for input and output
+• ws: Removes whitespace characters from the buffer
