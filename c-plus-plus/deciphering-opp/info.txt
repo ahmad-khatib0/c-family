@@ -20,3 +20,13 @@ Basic iostream manipulators (defined in the <iomanip> header file.):
 • setprecision(int): Defines the precision (number of digits) used to output floating point numbers
 • setw(int): Sets the width for input and output
 • ws: Removes whitespace characters from the buffer
+
+== A related historical note, #define (a preprocessor directive and macro replacement) was once used to 
+   create more mnemonic types, but typedef (and using) are certainly preferred. It’s worthy to note when 
+   viewing older code. 
+   A using statement can be used as an alternative to a simple typedef to create an alias for a type,
+   known as an alias-declaration. The using statement can also be used to simplify more complex types
+   (such as providing an alias for complex declarations when using the Standard Template Library or
+   declaring function pointers). The current trend is to favor a using alias-declaration to a typedef.
+
+
