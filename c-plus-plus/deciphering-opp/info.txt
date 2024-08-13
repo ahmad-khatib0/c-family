@@ -29,4 +29,13 @@ Basic iostream manipulators (defined in the <iomanip> header file.):
    (such as providing an alias for complex declarations when using the Standard Template Library or
    declaring function pointers). The current trend is to favor a using alias-declaration to a typedef.
 
+A pointer variable may point to the existing memory of a non-pointer variable, or it may point to memory that 
+  is dynamically allocated on the heap. The latter case is the most usual situation. Unless a pointer variable 
+  is properly initialized or assigned a value, the content of the pointer variable is meaningless and does 
+  not represent a usable address. A large mistake can be assuming that a pointer variable has been properly 
+  initialized when it may not have been. 
+
+
+
+
 
