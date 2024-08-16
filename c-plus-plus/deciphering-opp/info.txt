@@ -35,7 +35,32 @@ A pointer variable may point to the existing memory of a non-pointer variable, o
   not represent a usable address. A large mistake can be assuming that a pointer variable has been properly 
   initialized when it may not have been. 
 
+Using const qualification with function parameters cannot just allow the speed of passing an argument by 
+  reference, but the safety of passing an argument by value. It is a useful feature in C++.
 
+References are implemented as constant pointers, hence they must be initialized. Once initialized, references 
+  may not refer to a different object (though the value of the object being referenced can be changed).
 
+Even though a reference is implemented as a constant pointer, the usage of the reference variable is as if 
+  the underlying constant pointer has been dereferenced. For this reason, you cannot initialize a reference 
+  with a nullptr – not only can a nullptr not be dereferenced but since references can only be initialized 
+  and not reset, the opportunity would be lost to establish the reference variable to refer to a meaningful 
+  object. This also holds true for references to pointers.
 
+Understanding when we must use pointers instead of references?
+  Based on the underlying implementation of references (as const pointers), most of the restrictions for 
+  reference usage make sense. For example, references to references are generally not allowed; each level of 
+  indirection would need to be initialized upfront and that often takes multiple steps, such as when using 
+  pointers. However, we will see r-value references (&&) in Chapter 15, Testing Classes and Components, where 
+  we will examine various move operations. Arrays of references are also not permitted (each element would 
+  need to be initialized immediately); nonetheless, arrays of pointers are always an option. Also, pointers 
+  to references are not permitted; however, references to pointers are permitted (as are pointers to pointers).
+
+In some OO languages, the term method is used more loosely to imply either the operation or its method, 
+  based on the context of usage. In C++, the terms data member and member function are most often used.
+
+C++ structures may also be used to encapsulate data and their related behaviors. A C++ struct
+  can do anything a C++ class can do; in fact, class is implemented in terms of struct in C++.
+  Though structures and classes may behave identically (other than default visibility), classes are more
+  often used to model objects, relationships between object types, and implement object-oriented systems.
 
