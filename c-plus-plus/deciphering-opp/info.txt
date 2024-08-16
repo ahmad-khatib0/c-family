@@ -64,3 +64,12 @@ C++ structures may also be used to encapsulate data and their related behaviors.
   Though structures and classes may behave identically (other than default visibility), classes are more
   often used to model objects, relationships between object types, and implement object-oriented systems.
 
+It is interesting to note that data members, when grouped into an access region collectively under the same 
+  access label, are guaranteed to be laid out in memory in the order specified. However, if multiple access 
+  regions exist containing data members within a given class, the compiler is free to reorder those 
+  respective groupings for efficient memory layout.
+
+
+
+
+
