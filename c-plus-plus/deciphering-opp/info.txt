@@ -80,4 +80,11 @@ It is interesting to note that data members, when grouped into an access region 
   However, if multiple access regions exist containing data members within a given class, 
   the compiler is free to reorder those respective groupings for efficient memory layout.
 
+- A destructor is a member function whose purpose is to relinquish the resources an object 
+  may have acquired during its existence. A destructor is automatically invoked when a 
+  class or struct instance has either of the following occur:
+    • Goes out of scope (this applies to non-pointer variables)
+    • Is explicitly deallocated using delete (for pointers to objects)
+    • Both classes and structures may have destructors.
+
 
