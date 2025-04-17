@@ -1,4 +1,3 @@
-
 Standard data types in C++ include the following:
 • int: To store whole numbers
 • float: To store floating point values
@@ -12,64 +11,73 @@ Standard data types in C++ include the following:
 The iostream library
   cin can be used in conjunction with the extraction operator >> for buffered input
   cout can be used in conjunction with the insertion operator << for buffered output
-  cerr (unbuffered) and clog (buffered) can also be used in conjunction with the insertion operator, but for errors
+  cerr (unbuffered) and clog (buffered) can also be used in conjunction with the insertion 
+  operator, but for errors
 
 Basic iostream manipulators (defined in the <iomanip> header file.): 
-• endl: Places a newline character ('\n') in the buffer associated with cout then flushes the buffer
+• endl: Places a newline character ('\n') in the buffer associated with cout then flushes 
+  the buffer
 • flush: Clears the contents of the output stream
-• setprecision(int): Defines the precision (number of digits) used to output floating point numbers
+• setprecision(int): Defines the precision (number of digits) used to output floating point 
+  numbers
 • setw(int): Sets the width for input and output
 • ws: Removes whitespace characters from the buffer
 
-== A related historical note, #define (a preprocessor directive and macro replacement) was once used to 
-   create more mnemonic types, but typedef (and using) are certainly preferred. It’s worthy to note when 
-   viewing older code. 
-   A using statement can be used as an alternative to a simple typedef to create an alias for a type,
-   known as an alias-declaration. The using statement can also be used to simplify more complex types
-   (such as providing an alias for complex declarations when using the Standard Template Library or
-   declaring function pointers). The current trend is to favor a using alias-declaration to a typedef.
+== A related historical note, #define (a preprocessor directive and macro replacement) was 
+   once used to create more mnemonic types, but typedef (and using) are certainly preferred.
+   It’s worthy to note when viewing older code. 
+   A using statement can be used as an alternative to a simple typedef to create an alias 
+   for a type, known as an alias-declaration. The using statement can also be used to simplify 
+   more complex types (such as providing an alias for complex declarations when using the 
+   Standard Template Library or declaring function pointers). The current trend is to favor 
+   a using alias-declaration to a typedef.
 
-A pointer variable may point to the existing memory of a non-pointer variable, or it may point to memory that 
-  is dynamically allocated on the heap. The latter case is the most usual situation. Unless a pointer variable 
-  is properly initialized or assigned a value, the content of the pointer variable is meaningless and does 
-  not represent a usable address. A large mistake can be assuming that a pointer variable has been properly 
-  initialized when it may not have been. 
+A pointer variable may point to the existing memory of a non-pointer variable, or it may point
+  to memory that is dynamically allocated on the heap. The latter case is the most usual 
+  situation. Unless a pointer variable is properly initialized or assigned a value, the 
+  content of the pointer variable is meaningless and does not represent a usable address. 
+  A large mistake can be assuming that a pointer variable has been properly initialized 
+  when it may not have been. 
 
-Using const qualification with function parameters cannot just allow the speed of passing an argument by 
-  reference, but the safety of passing an argument by value. It is a useful feature in C++.
+Using const qualification with function parameters cannot just allow the speed of passing an
+  argument by reference, but the safety of passing an argument by value. It is a useful 
+  feature in C++.
 
-References are implemented as constant pointers, hence they must be initialized. Once initialized, references 
-  may not refer to a different object (though the value of the object being referenced can be changed).
+References are implemented as constant pointers, hence they must be initialized. Once 
+  initialized, references may not refer to a different object (though the value of the 
+  object being referenced can be changed).
 
-Even though a reference is implemented as a constant pointer, the usage of the reference variable is as if 
-  the underlying constant pointer has been dereferenced. For this reason, you cannot initialize a reference 
-  with a nullptr – not only can a nullptr not be dereferenced but since references can only be initialized 
-  and not reset, the opportunity would be lost to establish the reference variable to refer to a meaningful 
-  object. This also holds true for references to pointers.
+Even though a reference is implemented as a constant pointer, the usage of the reference 
+  variable is as if the underlying constant pointer has been dereferenced. For this reason, 
+  you cannot initialize a reference with a nullptr – not only can a nullptr not be dereferenced
+  but since references can only be initialized and not reset, the opportunity would be lost 
+  to establish the reference variable to refer to a meaningful object. This also holds true 
+  for references to pointers.
 
 Understanding when we must use pointers instead of references?
-  Based on the underlying implementation of references (as const pointers), most of the restrictions for 
-  reference usage make sense. For example, references to references are generally not allowed; each level of 
-  indirection would need to be initialized upfront and that often takes multiple steps, such as when using 
-  pointers. However, we will see r-value references (&&) in Chapter 15, Testing Classes and Components, where 
-  we will examine various move operations. Arrays of references are also not permitted (each element would 
-  need to be initialized immediately); nonetheless, arrays of pointers are always an option. Also, pointers 
-  to references are not permitted; however, references to pointers are permitted (as are pointers to pointers).
+  Based on the underlying implementation of references (as const pointers), most of the 
+  restrictions for reference usage make sense. For example, references to references are 
+  generally not allowed; each level of indirection would need to be initialized upfront and 
+  that often takes multiple steps, such as when using pointers. However, we will see r-value 
+  references (&&) in Chapter 15, Testing Classes and Components, where we will examine various 
+  move operations. Arrays of references are also not permitted (each element would need to be 
+  initialized immediately); nonetheless, arrays of pointers are always an option. Also, pointers 
+  to references are not permitted; however, references to pointers are permitted (as are 
+  pointers to pointers).
 
-In some OO languages, the term method is used more loosely to imply either the operation or its method, 
-  based on the context of usage. In C++, the terms data member and member function are most often used.
+In some OO languages, the term method is used more loosely to imply either the operation or
+  its method, based on the context of usage. In C++, the terms data member and member 
+  function are most often used.
 
 C++ structures may also be used to encapsulate data and their related behaviors. A C++ struct
   can do anything a C++ class can do; in fact, class is implemented in terms of struct in C++.
-  Though structures and classes may behave identically (other than default visibility), classes are more
-  often used to model objects, relationships between object types, and implement object-oriented systems.
+  Though structures and classes may behave identically (other than default visibility), 
+  classes are more often used to model objects, relationships between object types, and 
+  implement object-oriented systems.
 
-It is interesting to note that data members, when grouped into an access region collectively under the same 
-  access label, are guaranteed to be laid out in memory in the order specified. However, if multiple access 
-  regions exist containing data members within a given class, the compiler is free to reorder those 
-  respective groupings for efficient memory layout.
-
-
-
+It is interesting to note that data members, when grouped into an access region collectively
+  under the same access label, are guaranteed to be laid out in memory in the order specified.
+  However, if multiple access regions exist containing data members within a given class, 
+  the compiler is free to reorder those respective groupings for efficient memory layout.
 
 
