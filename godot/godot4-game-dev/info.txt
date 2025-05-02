@@ -1,15 +1,15 @@
-- A game framework is a set of libraries with helper code that assists in building the foundational
-  parts of a game. It doesn’t necessarily provide all the pieces, and you may still have to write
-  a great deal of code to tie everything together. Because of this, building a game with a game 
-  framework can take more time than one built with a full game engine.
+- A game framework is a set of libraries with helper code that assists in building the 
+  foundational parts of a game. It doesn’t necessarily provide all the pieces, and you 
+  may still have to write a great deal of code to tie everything together. Because of this,
+  building a game with a game framework can take more time than one built with a full game engine.
 
-- A game engine is a collection of tools and technologies designed to ease the process of game-making
-  by removing the need to reinvent the wheel for each new game project. It provides a collection of
-  commonly needed functionality that often would require a significant investment in time and effort
-  to develop.
+- A game engine is a collection of tools and technologies designed to ease the process of 
+  game-making by removing the need to reinvent the wheel for each new game project. It 
+  provides a collection of commonly needed functionality that often would require a 
+  significant investment in time and effort to develop.
   
-- One of the benefits of creating a separate scene for the player (and other objects) is that you
-  can test it independently, even before you’ve created other parts of a game
+- One of the benefits of creating a separate scene for the player (and other objects) is 
+  that you can test it independently, even before you’ve created other parts of a game
 
 - Your player scene needs to do the following things:
 • Display your character and its animations
@@ -20,48 +20,87 @@
   The “t” in the name stands for “text” because these are text files. 
 
 - Collision shape
-  When using Area2D or one of the other collision objects, you need to tell Godot what the shape
-  of the object is. Its collision shape defines the region it occupies and is used to detect overlaps 
-  and/or collisions. Shapes are defined by the various Shape2D types and include rectangles, 
-  circles, and polygons. In game development, this is sometimes referred to as a hitbox.
+  When using Area2D or one of the other collision objects, you need to tell Godot what the 
+  shape of the object is. Its collision shape defines the region it occupies and is used 
+  to detect overlaps and/or collisions. Shapes are defined by the various Shape2D types 
+  and include rectangles, circles, and polygons. In game development, this is sometimes 
+  referred to as a hitbox.
 
 - In each frame, you need the player to do three things:
   • Check for keyboard input
   • Move in the given direction
   • Play the appropriate animation
 
-- Input actions are defined in Project Settings under the Input Map tab. In this tab, you can 
-  define custom events and assign keys, mouse actions, or other inputs to them. By default, 
-  Godot has events assigned to the keyboard arrows, 
+- Input actions are defined in Project Settings under the Input Map tab. In this tab, you
+  can define custom events and assign keys, mouse actions, or other inputs to them. By 
+  default, Godot has events assigned to the keyboard arrows, 
 
 - About delta
-  The game engine attempts to run at a constant 60 frames per second. However, this can change 
-  due to computer slowdowns, either in Godot or from other programs running on your computer 
-  at the same time. If the frame rate is not consistent, then it will affect the movement of 
-  objects in your game. For example, consider an object that you want to move at 10 pixels 
-  every frame. If everything runs smoothly, this will mean the object moves 600 pixels in one 
-  second. However, if some of those frames take a bit longer, then there may have been only 
-  50 frames in that second, so the object only moved 500 pixels.
-  Godot, like many game engines and frameworks, solves this by passing you a value called delta,
-  which is the elapsed time since the previous frame. Most of the time, this will be very close 
-  to 0.016 seconds (around 16 milliseconds). If you then take your desired speed of 600 px/second
-  and multiply it by delta, you’ll get a movement of exactly 10 pixels. If, however, delta 
-  increased to 0.3 seconds, then the object would move 18 pixels. Overall, the movement 
-  speed remains consistent and independent of the frame rate.
+  The game engine attempts to run at a constant 60 frames per second. However, this can 
+  change due to computer slowdowns, either in Godot or from other programs running on 
+  your computer at the same time. If the frame rate is not consistent, then it will 
+  affect the movement of objects in your game. For example, consider an object that you
+  want to move at 10 pixels every frame. If everything runs smoothly, this will mean the
+  object moves 600 pixels in one second. However, if some of those frames take a bit 
+  longer, then there may have been only 50 frames in that second, so the object only 
+  moved 500 pixels. Godot, like many game engines and frameworks, solves this by passing 
+  you a value called delta, which is the elapsed time since the previous frame. Most of
+  the time, this will be very close to 0.016 seconds (around 16 milliseconds). If you 
+  then take your desired speed of 600 px/second and multiply it by delta, you’ll get 
+  a movement of exactly 10 pixels. If, however, delta increased to 0.3 seconds, then 
+  the object would move 18 pixels. Overall, the movement speed remains consistent and
+  independent of the frame rate.
 
 - Removing nodes
   queue_free() doesn’t delete the object immediately, but rather adds it to a queue to be
-  deleted at the end of the current frame. This is safer than immediately deleting the node 
-  because other code running in the game may still need the node to exist. By waiting until 
-  the end of the frame, Godot can be sure that all code that can access the node has 
-  completed and the node can be removed safely.
+  deleted at the end of the current frame. This is safer than immediately deleting the 
+  node because other code running in the game may still need the node to exist. By 
+  waiting until the end of the frame, Godot can be sure that all code that can access 
+  the node has completed and the node can be removed safely.
 
 - The final element your game needs is a user interface (UI). This will display information
   that the player needs to see during gameplay, which is often referred to as a heads-up 
   display (HUD) because the information appears as an overlay on top of the game view. 
   You’ll also use this scene to display a start button after the game ends.
 
-- The basic nodes for a UI are all extended from Control and appear with green icons in the 
-  node list. To create your UI, you’ll use various Control nodes to position, format, and 
-  display information.
+- The basic nodes for a UI are all extended from Control and appear with green icons in
+  the node list. To create your UI, you’ll use various Control nodes to position, 
+  format, and display information.
+
+- Godot offers three kinds of physics bodies, grouped under the PhysicsBody2D node type:
+. StaticBody2D: A static body is one that is not moved by the physics engine. It participates
+  in collision detection but does not move in response. This type of body is most often
+  used for objects that are part of the environment or do not need to have any dynamic
+  behavior, such as walls or the ground.
+. RigidBody2D: This is the physics body that provides simulated physics. This means that
+  you don’t control a RigidBody2D physics body’s position directly. Instead, you apply 
+  forces to it (gravity, impulses, and so on) and Godot’s built-in physics engine 
+  calculates the resultant movement, including collisions, bouncing, rotating, and 
+  other effects.
+. CharacterBody2D: This body type provides collision detection but no physics. All 
+  movement must be implemented in code, and you must implement any collision response 
+  yourself. Kinematic bodies are most often used for player characters or other actors 
+  that require arcade-style physics rather than realistic simulation, or when you need
+  more precise control over how the body moves.
+
+- Rigid bodies are also affected by global properties, which can be set in Project 
+  Settings under Physics | 2D. These settings apply to all bodies in the world.
+
+- If you click the Advanced Settings toggle in the upper right of the Project Settings 
+  window, you’ll see many advanced configuration values for the physics engine. You 
+  should be aware of two of them in particular: Default Linear Damp and Default Angular
+  Damp. These properties control how quickly a body will lose forward speed and rotation
+  speed, respectively. Setting them to lower values will make the world feel frictionless,
+  while using larger values will make it feel like your objects are moving through mud. 
+  This can be a great way to apply different movement styles to suit various game 
+  objects and environments.
+
+- finite state machine (FSM). When using an FSM, an entity can only be in one state at a
+  given time. To design your FSM, you define a number of states and what events or actions 
+  can cause a transition from one state to another.
+
+- when using RigidBody2D, you can’t directly set position because that would conflict
+  with the movement that the physics engine is calculating. 
+
+
 
