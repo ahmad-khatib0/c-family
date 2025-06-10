@@ -87,4 +87,33 @@ It is interesting to note that data members, when grouped into an access region 
     • Is explicitly deallocated using delete (for pointers to objects)
     • Both classes and structures may have destructors.
 
+- Are virtual destructors always necessary? That is a good question! Virtual destructors 
+  are always necessary when using a public base class hierarchy, that is, when using public 
+  inheritance. Recall that public base classes support Is-A relationships, which easily lead
+  to allowing a derived class instance to be stored using a pointer of its base class type.
+  For example, a GraduateStudent Is-A Student, so we can store a GraduateStudent as a Student 
+  in times when we require more generic processing along with its sibling types. We can always
+  upcast in this fashion across a public inheritance boundary. However, when we use implementation 
+  inheritance (that is, private or protected base classes), upcasting is not allowed. So, for
+  hierarchies employing private or protected inheritance, virtual destructors are not necessary
+  because upcasting is simply disallowed; hence, it would never be ambiguous as to which 
+  destructor should be the entry point for classes in private and protected base class 
+  hierarchies.
+
+- When a base class specifies one or more new virtual functions (not just redefinitions of an 
+  ancestor’s virtual functions), a virtual function pointer (vptr) is created below the memory
+  comprising a given instance of that type. This happens at runtime when the memory for an 
+  instance is created (on the stack, heap, or static/extern area). When the instance in 
+  question is constructed, not only will the appropriate constructor be called to initialize 
+  the instance, but this vptr will be initialized to point to the virtual function pointer 
+  table (v-table) entry for that class type. The v-table entry for a given class type will 
+  consist of a set of function pointers. These function pointers are often organized into an
+  array of function pointers. A function pointer is a pointer to an actual function. By 
+  dereferencing this pointer, you will actually invoke the function to which the pointer
+  points. There is an opportunity to pass arguments to the function, however, in order for 
+  this call to be generic through a function pointer, the arguments must be uniform for any 
+  version of this function that the pointer in question may point to. The premise of a function
+  pointer gives us the ability to point to different versions of a particular function. That 
+  is, we could point to different methods for a given operation. This is the basis for which 
+  we can automate dynamic binding in C++ for virtual functions.
 
