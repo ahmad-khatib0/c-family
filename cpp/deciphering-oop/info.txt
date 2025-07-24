@@ -117,3 +117,19 @@ It is interesting to note that data members, when grouped into an access region 
   is, we could point to different methods for a given operation. This is the basis for which 
   we can automate dynamic binding in C++ for virtual functions.
 
+- A discriminator is an object-oriented concept that helps outline the reasons why a given
+  class is derived from its base class. Discriminators tend to characterize the types of 
+  groupings of specializations that exist for a given base class.
+
+- Whenever temptation leads to the creation of a diamond-shaped hierarchy, examining the
+  discriminators can help us decide whether the design is reasonable, or whether perhaps 
+  an alternate design would prove better. Here are some good design metrics to consider:
+  . If the discriminators for the sibling classes that are being brought back together are
+    the same, then the diamond-shaped hierarchy is better off redesigned.
+  . When the sibling classes do not have unique discriminators, the attributes and behaviors
+    they will introduce will consist of duplications stemming from having a like-discriminator.
+    Consider making the discriminator a class to house those commonalities.
+  . If the discriminators for the sibling classes are unique, then the diamond-shaped 
+    hierarchy may be warranted. In this case, virtual base classes will prove helpful and 
+    should be added to the appropriate locations in the hierarchy.
+
