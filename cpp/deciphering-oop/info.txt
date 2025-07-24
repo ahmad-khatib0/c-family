@@ -133,3 +133,18 @@ It is interesting to note that data members, when grouped into an access region 
     hierarchy may be warranted. In this case, virtual base classes will prove helpful and 
     should be added to the appropriate locations in the hierarchy.
 
+-- Utilizing backlink maintenance and reference counting
+   For example, consider the Student and Course relationship. A Student is enrolled in many
+   Course instances. A Course contains an association to many Student instances. This is a 
+   many-to-many association. Let’s imagine that the Student wishes to drop a Course. It is 
+   not enough for a specific Student instance to remove a pointer to a specific Course 
+   instance. Additionally, the Student must let the particular Course instance know that 
+   the Student in question should be removed from that Course’s roster. This is known as 
+   backlink maintenance.
+
+- One idea to help us with overall link maintenance is to consider reference counting. 
+  The purpose of reference counting is to keep track of how many pointers may be pointing
+  to a given instance. For example, if other objects point to a given instance, that 
+  instance should not be deleted. Otherwise, the pointers in the other object will point 
+  to deallocated memory, which will lead to numerous runtime errors.
+
