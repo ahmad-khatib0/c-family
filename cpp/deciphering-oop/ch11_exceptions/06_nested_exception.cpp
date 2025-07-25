@@ -6,7 +6,6 @@
 
 using std::cout; // preferred to: using namespace std;
 using std::endl;
-using std::exception;
 using std::set_terminate;
 using std::setprecision;
 using std::string;

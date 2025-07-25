@@ -148,3 +148,25 @@ It is interesting to note that data members, when grouped into an access region 
   instance should not be deleted. Otherwise, the pointers in the other object will point 
   to deallocated memory, which will lead to numerous runtime errors.
 
+- Friend functions are functions that are individually granted extended scope to include 
+  the class with which they are associated. Let’s examine the implications and logistics:
+  • In the scope of friend functions, an instance of the associated type can access its 
+    own members as if it were in the scope of its own class.
+  • A friend function needs to be prototyped as a friend in the class definition of the 
+    class relinquishing access (that is, extending its scope).
+  • The keyword friend is used in front of the prototype that provides access.
+  • Functions overloading friend functions are not considered friends.
+
+- Friend classes are classes in which every member function of the class is a friend 
+  function of the associated class. Let’s examine the logistics:
+  • A friend class should have a forward declaration in the class definition of the class
+    that is providing it with access to its members (that is, scope).
+  • The keyword friend should precede the forward declaration of the class gaining 
+    access (that is, whose scope has been extended).
+
+- Not all operators may be overloaded in C++. The following operators cannot be 
+  overloaded: the member access operator (.), the ternary conditional operator (?:), 
+  the scope resolution operator ( ::), the pointer-to-member operator (.*), the sizeof()
+  operator, and the typeid() operator. All the rest may be overloaded, provided at least 
+  one operand is a user defined type.
+
