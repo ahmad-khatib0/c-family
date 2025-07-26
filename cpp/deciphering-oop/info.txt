@@ -170,3 +170,21 @@ It is interesting to note that data members, when grouped into an access region 
   operator, and the typeid() operator. All the rest may be overloaded, provided at least 
   one operand is a user defined type.
 
+- The Standard Template Library(STL) in C++ is a library of standard classes and utilities 
+  that extend the C++ language. The use of the STL is so pervasive that it is as though 
+  the STL is a part of the language itself; it is an essential and integral part of C++.
+  The STL in C++ has four key components comprising the library: containers, iterators, 
+  functions, and algorithms.
+
+- There are several categories of container classes – sequential, associative, and 
+  unordered. Let’s summarize these categories and provide a few examples of each:
+  • Sequential containers: Implement encapsulated data structures that can be accessed 
+    in a sequential manner, such as list, queue, or stack. It is interesting to note that 
+    queue and stack can be thought of as a customized or adaptive interface for a more basic
+    container, such as a list. Nonetheless, a queue and stack still provide sequential 
+    access to their elements.
+  • Associative containers: Implement sorted, encapsulated data structures that 
+    can be searched quickly to retrieve an element such as set or map.
+  • Unordered containers: Implement unordered, encapsulated data structures that 
+    can be searched reasonably quickly, such as unordered_set or unordered_map.
+
