@@ -188,3 +188,20 @@ It is interesting to note that data members, when grouped into an access region 
   • Unordered containers: Implement unordered, encapsulated data structures that 
     can be searched reasonably quickly, such as unordered_set or unordered_map.
 
+- The pImpl pattern (pointer to Implementation idiom) is a structural design pattern 
+  that separates the implementation of a class from its public interface. This pattern 
+  was originally known as the Bridge pattern by the Gang of Four (GofF) and is also known
+  as the Cheshire Cat, compiler-firewall idiom, d-pointer, opaque pointer, or Handle pattern.
+  The primary purpose of this pattern is to minimize compile-time dependencies. The result 
+  of reducing compile-time dependencies is that changes in a class definition (most notably,
+  the private access region) will not send a wave of timely recompilations throughout a 
+  developing or deployed application. Instead, the necessary recompiled code can be 
+  isolated to the implementation of the class itself. The other pieces of the application 
+  that depend on the class definition will no longer be affected by recompilation.
+
+- To implement the pImpl pattern customarily, we must first understand smart pointers. 
+  A smart pointer is a small wrapper class that encapsulates a raw pointer, ensuring 
+  that the pointer it contains is automatically deleted when the wrapper object goes out
+  of scope. The class implementing the smart pointer can be implemented using templates 
+  to create a smart pointer for any data type.
+
