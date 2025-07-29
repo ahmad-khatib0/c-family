@@ -14,8 +14,7 @@ int main(int argc, char *argv[]) {
   int x = 5, y = 33;
 
   cout << Minimum(x, y) << endl;
-  // Minimum(x, y); // function call that ignores return value will issue a
-  // warning
+  // Minimum(x, y); // function call that ignores return value will issue a warning
 
   return 0;
 }
