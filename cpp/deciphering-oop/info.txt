@@ -205,3 +205,48 @@ It is interesting to note that data members, when grouped into an access region 
   of scope. The class implementing the smart pointer can be implemented using templates 
   to create a smart pointer for any data type.
 
+- Many C++ class libraries follow RAII for resource management, such as std::string and
+  std::vector. These classes follow the idiom in that their constructors acquire the 
+  necessary resources (heap memory), and release the resources automatically in their 
+  destructors. The user of these classes is not required to explicitly release any memory
+  for the container itself. In these class libraries, RAII as a technique is used to manage
+  these resources, even though the heap memory is not managed using smart pointers. Instead,
+  the concepts of RAII are encapsulated and hidden within the class implementations themselves.
+
+- Loop's next item (pre increment vs post increment): 
+  Consider, for example, the pre versus post increment in the statement that is executed 
+  before the loop condition is retested (that is, ++iter). Had this been iter++, the code
+  would be less efficient. This is because iter is an object and the pre-increment returns
+  a reference to the object, whereas the post-increment returns a temporary object 
+  (what is created and destroyed with each loop iteration). The post-increment also 
+  utilizes an overloaded function, so the compiler cannot optimize its usage.
+
+- Multithreaded programming in C++ is available through a variety of commercial or public
+  domain multithreading libraries. Additionally, the Standard C++ Library features thread 
+  support in a variety of capacities including using std::condition_variable for thread 
+  synchronization, std::mutex to ensure mutual exclusivity of critical resources 
+  (by avoiding race conditions), and std::semaphore to model resource counting. By 
+  instantiating a std::thread object and becoming proficient with the aforementioned 
+  features, we can add multithreaded programming using an established C++ library. 
+  Additionally, the std::atomic template can be added to a type to establish it as an 
+  atomic type and ensure type-safe synchronization. The std::exception_ptr type allows 
+  the transport of exceptions between coordinating threads. Overall, there are many 
+  thread library features to consider; this is a vast topic.
+
+** Understanding resources for programming safely in C++
+   There are many online resources for programming guidelines in C++. The essential resource,
+   however, is the ISO C++ Core Guidelines, assembled primarily by Bjarne Stroustrup and 
+   Herb Sutter, which can be found at the following GitHub URL: 
+   https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md. 
+   Their collective goal is to help programmers use modern C++ safely and more effectively.
+   Selected market sectors may have guidelines imposed upon them to obtain or ensure 
+   certification within an industry. For example, MISRA is a set of C++ coding standards for
+   the Motor Industry Software Reliability Association; MISRA has also been adopted as a 
+   standard across other industries, such as for medical systems. Another coding standard,
+   developed for embedded systems, is CERT, developed at Carnegie Mellon University (CMU). 
+   Once an acronym for Computer Emergency Response Team, CERT is now a registered trademark
+   of CMU. CERT has been adopted in many financial sectors as well. JSF AV C++ 
+   (Joint Strike Fighter Air Vehicle C++) is a C++ coding standard used in the aerospace 
+   engineering domain, developed by Lockheed Martin, to ensure error-free code
+   for safety-critical systems.
+
